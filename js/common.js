@@ -1,50 +1,5 @@
 $(document).ready(function() {
 
-	//Цели для Яндекс.Метрики и Google Analytics
-	$(".count_element").on("click", (function() {
-		ga("send", "event", "goal", "goal");
-		yaCounterXXXXXXXX.reachGoal("goal");
-		return true;
-	}));
-
-	//SVG Fallback
-	if(!Modernizr.svg) {
-		$("img[src*='svg']").attr("src", function() {
-			return $(this).attr("src").replace(".svg", ".png");
-		});
-	};
-
-	//Аякс отправка форм
-	//Документация: http://api.jquery.com/jquery.ajax/
-	$("#form").submit(function() {
-		$.ajax({
-			type: "POST",
-			url: "mail.php",
-			data: $(this).serialize()
-		}).done(function() {
-			alert("Спасибо за заявку!");
-			setTimeout(function() {
-				
-				$("#form").trigger("reset");
-			}, 1000);
-		});
-		return false;
-	});
-
-	//Chrome Smooth Scroll
-	try {
-		$.browserSelector();
-		if($("html").hasClass("chrome")) {
-			$.smoothScroll();
-		}
-	} catch(err) {
-
-	};
-
-	$("img, a").on("dragstart", function(event) { event.preventDefault(); });
-
-	
-
 	//resize fullscreen img
 	function heightDetect() {
 		$(".main_head").css("height", $(window).height());
@@ -52,10 +7,6 @@ $(document).ready(function() {
 	heightDetect();
 	$(window).resize(function() {
 		heightDetect();
-	});
-
-	$('.parallax-window').parallax({
-		imageSrc: '../_optimized_html/img/bg3.jpg' 
 	});
 
 	//menu click
@@ -88,6 +39,10 @@ $(document).ready(function() {
 	// 	$(".animation_3").animated("fadeInRight");
 	// }
 
+	$('.popup').magnificPopup({type:'image'});
+
+	//paints mix
+	$("#paint-list").mixItUp();
 
 	//active
 	$(".paint-nav li").click(function() {
@@ -108,8 +63,12 @@ $(document).ready(function() {
 	//scroll to
 	$(".nav-menu ul a").mPageScroll2id();
 	$(".top-nav ul a").mPageScroll2id();
-
-
 });
 
+$(window).load(function() {
 
+	$(".loader_inner").fadeOut();
+	$(".loader").delay(400).fadeOut("slow");
+
+	$(".name-wrap h1").animated("fadeInDown", "fadeOutUp");
+}); 
