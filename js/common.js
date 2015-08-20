@@ -63,6 +63,12 @@ $(document).ready(function() {
 	//scroll to
 	$(".nav-menu ul a").mPageScroll2id();
 	$(".top-nav ul a").mPageScroll2id();
+
+	//lazyload
+	$('a img').lazyload({
+	  event: "scrollstop",
+	  effect : "fadeIn"
+	});
 });
 
 $(window).load(function() {
